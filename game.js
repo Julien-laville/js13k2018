@@ -8,6 +8,7 @@ import k from './k'
 k()
 const p = new P()
 const w = new W(T_SIZE)
+let cd = 3600
 
 window.ctx = c.getContext('2d')
 c.width = C_WIDTH

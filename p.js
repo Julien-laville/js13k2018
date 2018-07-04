@@ -5,6 +5,8 @@ class P {
     this.p = new V2c(100,700)
     this.s = new V2c(0,0)
 
+    this.hp = 1000
+
   }
   k() {
     if(press[k.LEFT]) { // up

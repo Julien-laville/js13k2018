@@ -1,0 +1,152 @@
+<!doctype HTML>
+<meta charset="UTF-8">
+
+<style>
+  TD {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #e4e6e7;
+  }
+  TABLE {
+    border-collapse: collapse;
+  }
+
+  .water {
+    background: aqua;
+  }
+
+  .shelter {
+    background: brown;
+  }
+
+  .end {
+    background: green;
+  }
+
+  .start {
+    background: red;
+  }
+
+  .h {
+    background: #e4e6e7;
+  }
+  
+  .player {
+    background-color: #000;
+  }
+</style>
+
+<div class="ui">
+  <ul class="toolbox">
+
+  </ul>
+</div>
+
+
+
+
+
+
+
+<div id="innerMap"></div>
+
+
+<script>
+
+
+  map = [
+    ['h',0,'start',0,'h'],
+    [,0,0,0,0],
+    [0,0,'shelter',0,0],
+    [0,0,0,0,0],
+    [0,'water','water','water',0],
+    [0,0,0,0,0],
+    ['h',0,'end',0,'h'],
+    ]
+
+
+
+  let x = 2
+  let y = 0
+  let fx = 0
+  let fy = 0
+
+  let time = 0
+
+  const UP = 90
+  const DOWN = 83
+  const LEFT = 81
+  const RIGHT = 68
+
+  const FLARE = 33
+
+  const TOGGLE_BOOTS = 33
+  const TOGGLE_UMBRELLA = 33
+
+  let keyStatus = 'idle'
+  document.onkeydown = (e) => {
+    if(keyStatus === 'idle') {
+      keyStatus = 'ready'
+    }
+  }
+  document.onkeyup = (e) => {
+    if(keyStatus === 'ready') {
+      /* cancellation logic goes here */
+      if (e.keyCode === UP || e.keyCode === DOWN || e.keyCode === LEFT || e.keyCode === RIGHT || e.keyCode === FLARE || e.keyCode === TOGGLE_BOOTS || e.keyCode === TOGGLE_UMBRELLA) {
+        turn(e.keyCode)
+      }
+    }
+  }
+
+  function turn(input) {
+    keyStatus = 'idle'
+
+    /* toggle */
+    if(input === TOGGLE_UMBRELLA || input === TOGGLE_BOOTS) {
+      time += 2 /* magic number toggle cost */
+    }
+    /*  move */
+    if(input === UP) { fx = x; fy = --y }
+    if(input === DOWN) { fx = x; fy = ++y }
+    if(input === LEFT) { fx = --x; fy = y }
+    if(input === RIGHT) { fx = ++x; fy = y }
+
+      if(exist()) {
+        x = fx
+        y = fy
+      } else {
+        console.log('Déplacement interdit')
+      }
+
+
+      draw()
+
+  }
+
+
+  function draw() {
+    console.log(x,y)
+    let all = map.map((column,l) => {
+      let idd = '<tr>' + column.map((cas,c) => {
+        let p = ''
+        if(l === y && c === x) {
+          console.log(x,y,l,c)
+          p = 'o'
+        }
+        return `<td class="${cas}">${p}</td>`
+      }).join('\n') + '</tr>'
+      return idd
+    })
+
+
+
+    innerMap.innerHTML = '<table>' + all + '</table>'
+  }
+
+  draw()
+
+
+  function exist() {
+    return fx >= 0 && fy >= 0 && fx < 10 && fy < 10
+   }
+</script>
