@@ -36,11 +36,7 @@
   }
 </style>
 
-<div class="ui">
-  <ul class="toolbox">
-
-  </ul>
-</div>
+<div id="ui"></div>
 
 
 
@@ -56,8 +52,8 @@
 
   map = [
     ['h',0,'start',0,'h'],
-    [,0,0,0,0],
-    [0,0,'shelter',0,0],
+    [0,0,0,0,0],
+    [0,'shelter',0,0,0],
     [0,0,0,0,0],
     [0,'water','water','water',0],
     [0,0,0,0,0],
@@ -65,13 +61,19 @@
     ]
 
 
+  /* player status */
+  let x = fx = 2
+  let y = fy = 0
 
-  let x = 2
-  let y = 0
-  let fx = 0
-  let fy = 0
+  let para = false
+  let boots = false
 
+
+
+
+  /* game rules */
   let time = 0
+  let watering = 0
 
   const UP = 90
   const DOWN = 83
@@ -80,8 +82,8 @@
 
   const FLARE = 33
 
-  const TOGGLE_BOOTS = 33
-  const TOGGLE_UMBRELLA = 33
+  const TOGGLE_BOOTS = 49
+  const TOGGLE_UMBRELLA = 50
 
   let keyStatus = 'idle'
   document.onkeydown = (e) => {
@@ -104,34 +106,66 @@
     /* toggle */
     if(input === TOGGLE_UMBRELLA || input === TOGGLE_BOOTS) {
       time += 2 /* magic number toggle cost */
+      watering += 2 /* magic number toggle cost */
+    }
+
+    if(input === TOGGLE_UMBRELLA) {
+      para = !para
+    }
+    if(input === TOGGLE_BOOTS) {
+      boots = !boots
     }
     /*  move */
-    if(input === UP) { fx = x; fy = --y }
-    if(input === DOWN) { fx = x; fy = ++y }
-    if(input === LEFT) { fx = --x; fy = y }
-    if(input === RIGHT) { fx = ++x; fy = y }
+    if(input === UP) { fx = x; fy = y-1;time++;w() }
+    if(input === DOWN) { fx = x; fy = y+1;time++;w() }
+    if(input === LEFT) { fx = x-1; fy = y;time++;w() }
+    if(input === RIGHT) { fx = x+1; fy = y;time++;w() }
 
       if(exist()) {
         x = fx
         y = fy
       } else {
+        fx = x
+        fy = y
         console.log('Déplacement interdit')
       }
 
 
       draw()
 
+      if(map[y][x] === 'end') {
+        alert(`Win in ${time} turn - ${watering} watered`)
+      }
   }
 
+  function w() {
+    if(map[y][x] === 'shelter' ) {
+      return
+    }
+    if(!para)
+      watering++
+
+  }
+  
 
   function draw() {
-    console.log(x,y)
+    /* update ui */
+
+  ui.innerHTML = `<h1>t : ${time}</h1><h2>w : ${watering}</h2>`
+    /* update board */
     let all = map.map((column,l) => {
       let idd = '<tr>' + column.map((cas,c) => {
         let p = ''
         if(l === y && c === x) {
-          console.log(x,y,l,c)
-          p = 'o'
+          if(boots && para) {
+            p = '👢☂'
+          } else if (boots) {
+            p = '👢'
+          } else if(para) {
+            p = '☂'
+          } else {
+            p = 'o'
+          }
         }
         return `<td class="${cas}">${p}</td>`
       }).join('\n') + '</tr>'
@@ -147,6 +181,14 @@
 
 
   function exist() {
-    return fx >= 0 && fy >= 0 && fx < 10 && fy < 10
-   }
+    if(map[fy][fx] === 'water' && boots === false) {
+      console.log('get your boots')
+      return false
+    }
+    if(map[fy][fx] === 'h') {
+      return false
+    }
+    return fx >= 0 && fy >= 0 && fx < map[0].length && fy < map.length
+
+  }
 </script>
