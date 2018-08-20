@@ -1,5 +1,4 @@
 function k() {
-  console.log('a')
   window.press = {}
   window.onkeydown = (e) => {
     press[e.keyCode] = true

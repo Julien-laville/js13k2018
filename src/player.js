@@ -1,5 +1,5 @@
-import V2c from "./v2c";
-import k from './k'
+import V2c from "./lib/v2c";
+import k from './src/k'
 class P {
   constructor() {
     this.p = new V2c(100,700)

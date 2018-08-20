@@ -1,4 +1,4 @@
-import k from './k'
+import k from './src/k'
 class W {
   constructor(t_size) {
     this.a = 0

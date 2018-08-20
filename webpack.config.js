@@ -1,10 +1,10 @@
 const path = require('path')
 
 module.exports = {
-  entry: ['./game.js'],
+  entry: ['./src/game.js'],
   output: {
-    path: path.join(__dirname),
-    filename: 'dist.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'g.js'
   }, module: {
     rules: [{
       test: /\.js$/,
