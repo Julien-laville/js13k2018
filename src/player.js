@@ -1,11 +1,11 @@
 import V2c from "./lib/v2c";
-import k from './src/k'
+import k from './ctrl'
 class P {
   constructor() {
     this.p = new V2c(100,700)
     this.s = new V2c(0,0)
 
-    this.hp = 1000
+
 
   }
   k() {
