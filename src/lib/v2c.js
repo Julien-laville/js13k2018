@@ -3,7 +3,7 @@ class V2c {
     this.x = x; this.y = y
   }
   fillRect(w,h) {
-    ctx.fillRect(this.x,this.y,w,h)
+    ctx.fillRect(this.x - w / 2,this.y - h / 2,w,h)
   }
   set(x,y) {
     this.x=x;this.y=y

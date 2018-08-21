@@ -1,25 +1,49 @@
 import V2c from "./lib/v2c";
 import k from './ctrl'
 class P {
-  constructor() {
-    this.p = new V2c(100,700)
-    this.s = new V2c(0,0)
+  constructor(map) {
+    this.w = map.w
+    let start = map.vertices.find((vertex) =>
+      vertex.t === 'start'
+    )
+    this.pos = new V2c(start.id % this.w, Math.floor(start.id / this.w))
+    this.optiEdges = []
 
-
+    map.edges.forEach((edge) => {
+      let a = new V2c(edge[0] % this.w, Math.floor(edge[0] / this.w))
+      let b = new V2c(edge[1] % this.w, Math.floor(edge[1] / this.w))
+      this.optiEdges.push({a : a, b : b})
+    })
 
   }
   k() {
-    if(press[k.LEFT]) { // up
-      this.p.add(this.s.set(30,0))
+    setTimeout(() => {
+      this.moving = false
+    }, 1000)
+    if(this.moving) {
+      if(press[k.LEFT])
+        this.pos.add(new V2c(-1,0)); this.moving = true
+      if(press[k.RIGHT])
+        this.pos.add(new V2c(1,0)); this.moving = true
+      if(press[k.UP])
+        this.pos.add(new V2c(0,-1)); this.moving = true
+      if(press[k.DOWN])
+        this.pos.add(new V2c(0,1)); this.moving = true
     }
 
-    if(press[k.RIGHT]) { //left
-      this.p.add(this.s.set(-30,0))
-    }
+
   }
   d() {
-    ctx.fillStyle='#fff'
-    this.p.fillRect(20,20)
+    ctx.beginPath()
+    ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+    ctx.fillStyle='#f0f'
+    ctx.fill()
+  }
+
+  move(direction) {
+    this.optiEdges.forEach(() => {
+
+    })
   }
 }
 
