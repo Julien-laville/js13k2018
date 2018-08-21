@@ -45,7 +45,6 @@ class P {
   }
 
   move() {
-    log("test")
       this.moving = true
       setTimeout(() => {
           this.moving = false
