@@ -2,6 +2,7 @@ import V2c from "./lib/v2c";
 import k from './ctrl'
 class P {
   constructor(map) {
+    this.moving = false
     this.w = map.w
     let start = map.vertices.find((vertex) =>
       vertex.t === 'start'
@@ -17,18 +18,16 @@ class P {
 
   }
   k() {
-    setTimeout(() => {
-      this.moving = false
-    }, 1000)
-    if(this.moving) {
+
+    if(!this.moving) {
       if(press[k.LEFT])
-        this.pos.add(new V2c(-1,0)); this.moving = true
+        this.pos.add(new V2c(-1,0)), this.move()
       if(press[k.RIGHT])
-        this.pos.add(new V2c(1,0)); this.moving = true
+        this.pos.add(new V2c(1,0)),  this.move()
       if(press[k.UP])
-        this.pos.add(new V2c(0,-1)); this.moving = true
+        this.pos.add(new V2c(0,-1)), this.move()
       if(press[k.DOWN])
-        this.pos.add(new V2c(0,1)); this.moving = true
+        this.pos.add(new V2c(0,1)), this.move()
     }
 
 
@@ -36,14 +35,21 @@ class P {
   d() {
     ctx.beginPath()
     ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-    ctx.fillStyle='#f0f'
+      if(this.move) {
+          ctx.fillStyle='#f0f'
+      } else {
+          ctx.fillStyle='#0f0'
+      }
+
     ctx.fill()
   }
 
-  move(direction) {
-    this.optiEdges.forEach(() => {
-
-    })
+  move() {
+    log("test")
+      this.moving = true
+      setTimeout(() => {
+          this.moving = false
+      }, 500)
   }
 }
 
