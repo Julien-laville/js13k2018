@@ -20,18 +20,53 @@ class P {
   k() {
 
     if(!this.moving) {
-      if(press[k.LEFT])
-        this.pos.add(new V2c(-1,0)), this.move()
-      if(press[k.RIGHT])
-        this.pos.add(new V2c(1,0)),  this.move()
-      if(press[k.UP])
-        this.pos.add(new V2c(0,-1)), this.move()
-      if(press[k.DOWN])
-        this.pos.add(new V2c(0,1)), this.move()
+      let futureRoute
+      if(press[k.LEFT]) {
+        let p = this.pos.cadd(-1,0)
+        futureRoute = {a : this.pos, b : p}
+        if(this.isRouteExist(futureRoute)) {
+          this.pos = p
+          this.move()
+        }
+
+      }
+      if(press[k.RIGHT]) {
+        console.log("right")
+        let p = this.pos.cadd(1,0)
+        futureRoute = {a : this.pos, b : p}
+        console.log(futureRoute)
+        if(this.isRouteExist(futureRoute)) {
+          console.log("exist")
+          this.pos = p
+          this.move()
+        }
+      }
+      if(press[k.UP]) {
+        let p = this.pos.cadd(0,-1)
+        futureRoute = {a : this.pos, b : p}
+        if(this.isRouteExist(futureRoute)) {
+          this.pos = p
+          this.move()
+        }
+      }
+      if(press[k.DOWN]) {
+        let p = this.pos.cadd(0,1)
+        futureRoute = {a : this.pos, b : p}
+        if(this.isRouteExist(futureRoute)) {
+          this.pos = p
+          this.move()
+        }
+      }
     }
-
-
   }
+
+  isRouteExist(route) {
+    return this.optiEdges.find((optiEdge) => {
+      return (optiEdge.a.eq(route.a) && optiEdge.b.eq(route.b)) || (optiEdge.a.eq(route.b) && optiEdge.b.eq(route.a))
+    })
+  }
+
+
   d() {
     ctx.beginPath()
     ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)

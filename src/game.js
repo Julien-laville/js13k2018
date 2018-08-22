@@ -36,8 +36,8 @@ const netork0 = {
 }
 
 
-const p = new P(netork0)
 const w = new W(netork0)
+const p = new P(netork0)
 const background = new Background(netork0)
 window.ctx = c.getContext('2d')
 c.width = C_WIDTH

@@ -9,9 +9,17 @@ class V2c {
     this.x=x;this.y=y
     return this
   }
+  cadd(x, y) {
+    let n = new V2c(this.x, this.y)
+    n.add(new V2c(x, y))
+    return n
+  }
   add(v) {
     this.x+=v.x;this.y+=v.y
     return this
+  }
+  eq(v) {
+    return this.x === v.x && this.y === v.y
   }
 }
 
