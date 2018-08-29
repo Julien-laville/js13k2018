@@ -21,6 +21,9 @@ class V2c {
   eq(v) {
     return this.x === v.x && this.y === v.y
   }
+  toString() {
+    return `${this.x} | ${this.y}`
+  }
 }
 
 export  default  V2c

@@ -12,20 +12,20 @@ const netork0 = {
   w:5,
   h:5,
   edges : [
-    [2,7,0],
+    [2,7,-1],
     [6,7,1],
     [7,8,1],
-    [10,11,0],
+    [10,11,1],
     [6,11,1],
-    [7,12,0],
-    [8,13,0],
-    [11,12,0],
-    [13,14,0],
-    [11,16,0],
-    [13,18,0],
-    [16,17,0],
-    [17,18,0],
-    [17,22,0],
+    [7,12,1],
+    [8,13,1],
+    [11,12,1],
+    [13,14,1],
+    [11,16,1],
+    [13,18,1],
+    [16,17,1],
+    [17,18,1],
+    [17,22,-1],
   ],
   vertices : [
     {id : 10, t : 'start'},
@@ -35,9 +35,8 @@ const netork0 = {
   ]
 }
 
-
 const w = new W(netork0)
-const p = new P(netork0)
+window.p = new P(netork0, w)
 const background = new Background(netork0)
 window.ctx = c.getContext('2d')
 c.width = C_WIDTH

@@ -1,30 +1,29 @@
 import V2c from "./lib/v2c";
 import k from './ctrl'
 class P {
-  constructor(map) {
+  constructor(map, network) {
     this.moving = false
     this.w = map.w
     let start = map.vertices.find((vertex) =>
       vertex.t === 'start'
     )
     this.pos = new V2c(start.id % this.w, Math.floor(start.id / this.w))
-    this.optiEdges = []
 
-    map.edges.forEach((edge) => {
-      let a = new V2c(edge[0] % this.w, Math.floor(edge[0] / this.w))
-      let b = new V2c(edge[1] % this.w, Math.floor(edge[1] / this.w))
-      this.optiEdges.push({a : a, b : b})
-    })
+    this.edges = network.edges
+    this.vertices = network.vertices
 
+    this.dataCount = 0
   }
-  k() {
 
+  k() {
     if(!this.moving) {
       let futureRoute
       if(press[k.LEFT]) {
         let p = this.pos.cadd(-1,0)
-        futureRoute = {a : this.pos, b : p}
-        if(this.isRouteExist(futureRoute)) {
+        futureRoute = {from : this.pos, to : p}
+        let route = this.isRouteExist(futureRoute)
+        if(route && route.isAvailable()) {
+          route.consume()
           this.pos = p
           this.move()
         }
@@ -33,26 +32,30 @@ class P {
       if(press[k.RIGHT]) {
         console.log("right")
         let p = this.pos.cadd(1,0)
-        futureRoute = {a : this.pos, b : p}
-        console.log(futureRoute)
-        if(this.isRouteExist(futureRoute)) {
-          console.log("exist")
+        futureRoute = {from : this.pos, to : p}
+        let route = this.isRouteExist(futureRoute)
+        if(route && route.isAvailable()) {
+          route.consume()
           this.pos = p
           this.move()
         }
       }
       if(press[k.UP]) {
         let p = this.pos.cadd(0,-1)
-        futureRoute = {a : this.pos, b : p}
-        if(this.isRouteExist(futureRoute)) {
+        futureRoute = {from : this.pos, to : p}
+        let route = this.isRouteExist(futureRoute)
+        if(route && route.isAvailable()) {
+          route.consume()
           this.pos = p
           this.move()
         }
       }
       if(press[k.DOWN]) {
         let p = this.pos.cadd(0,1)
-        futureRoute = {a : this.pos, b : p}
-        if(this.isRouteExist(futureRoute)) {
+        futureRoute = {from : this.pos, to : p}
+        let route = this.isRouteExist(futureRoute)
+        if(route && route.isAvailable()) {
+          route.consume()
           this.pos = p
           this.move()
         }
@@ -61,29 +64,37 @@ class P {
   }
 
   isRouteExist(route) {
-    return this.optiEdges.find((optiEdge) => {
-      return (optiEdge.a.eq(route.a) && optiEdge.b.eq(route.b)) || (optiEdge.a.eq(route.b) && optiEdge.b.eq(route.a))
-    })
+    let edge =  this.edges.find((edge) => {
+      return (edge.from.eq(route.from) && edge.to.eq(route.to)) || (edge.from.eq(route.to) && edge.to.eq(route.from))
+    });
+    return edge
   }
 
 
   d() {
     ctx.beginPath()
     ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-      if(this.move) {
-          ctx.fillStyle='#f0f'
-      } else {
-          ctx.fillStyle='#0f0'
-      }
-
+    if(this.move) {
+      ctx.fillStyle='#f0f'
+    } else {
+      ctx.fillStyle='#0f0'
+    }
     ctx.fill()
+    ctx.fillStyle = "#fff"
+    ctx.fillText(this.dataCount, this.pos.x * 30 + 10, this.pos.y * 30 - 10)
   }
 
   move() {
       this.moving = true
+      this.vertices.forEach((vertex) => {
+        if(vertex.pos.eq(this.pos) && vertex.type === 'data' && vertex.status !== false) {
+          this.dataCount++
+          vertex.consume()
+        }
+      })
       setTimeout(() => {
           this.moving = false
-      }, 500)
+      }, 250)
   }
 }
 
