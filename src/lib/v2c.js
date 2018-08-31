@@ -24,6 +24,9 @@ class V2c {
   toString() {
     return `${this.x} | ${this.y}`
   }
+  stance(v) {
+    return Math.sqrt(Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2))
+  }
 }
 
 export  default  V2c

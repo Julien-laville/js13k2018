@@ -5,6 +5,20 @@ export class Vertex {
     this.opt = opt
     this.consumed = false
   }
+
+  de() {
+    ctx.fillStyle = '#fff'
+    if(this.type === 'data') {
+      ctx.fillStyle = "#3ae2ff"
+    } else if(this.type === 'gate') {
+      ctx.fillStyle = "#50ff2b"
+    } else {
+      ctx.fillStyle = "#ffe103"
+    }
+    ctx.beginPath()
+    ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+    ctx.fill()
+  }
   d() {
     ctx.fillStyle = '#fff'
     if(this.type === 'data') {

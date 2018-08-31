@@ -4,6 +4,7 @@ window.log=(m)=>console.log(m)
 import P from './player'
 import W from './network'
 import k from './ctrl'
+import {Editor} from './editor'
 import Background from './background'
 k()
 
@@ -34,7 +35,7 @@ const netork0 = {
     {id : 22, t : 'data'}
   ]
 }
-
+const editor = new Editor
 const w = new W(netork0)
 window.p = new P(netork0, w)
 const background = new Background(netork0)
@@ -43,16 +44,23 @@ c.width = C_WIDTH
 c.height = C_HEIGHT
 ctx.fillStyle = '#000'
 ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
+let gameState = 'editor'
 
 let ll = () => {
   c.width+=0
   background.l()
-  p.k() // player
-  w.k() // world
-
   background.d()
-  w.d()
-  p.d()
+  if(gameState === 'menu') {
+
+  } else if(gameState === 'game') {
+    p.k() // player
+    w.k() // world
+
+    w.d()
+    p.d()
+  } else if(gameState === 'editor'){
+    editor.d()
+  }
 
   requestAnimationFrame(ll)
 }
