@@ -1,3 +1,5 @@
+import MenuManager from "./menu_manager";
+
 const C_WIDTH = 400
 const C_HEIGHT = 800
 window.log=(m)=>console.log(m)
@@ -6,6 +8,7 @@ import W from './network'
 import k from './ctrl'
 import {Editor} from './editor'
 import Background from './background'
+import home from './menus/home'
 k()
 
 
@@ -44,13 +47,18 @@ c.width = C_WIDTH
 c.height = C_HEIGHT
 ctx.fillStyle = '#000'
 ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
-let gameState = 'editor'
+let gameState = 'home'
+
+let homeMenu = new MenuManager(home)
 
 let ll = () => {
   c.width+=0
   background.l()
   background.d()
-  if(gameState === 'menu') {
+  if(gameState === 'home') {
+    homeMenu.k()
+    homeMenu.d()
+  } else if(gameState === 'level-select') {
 
   } else if(gameState === 'game') {
     p.k() // player

@@ -6,15 +6,6 @@ function k() {
   window.onkeyup = (e) => {
     press[e.keyCode] = false
   }
-  document.onmousedown = (e) => {
-    if(e.button === 0) {
-      press[0] = true
-    }
-    if(e.button === 2) {
-      press[2] = true
-    }
-    e.preventDefault()
-  }
 }
 k.UP = 90
 k.LEFT = 81

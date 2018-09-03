@@ -14,6 +14,9 @@ export class Editor {
     dataB.onclick = () => {
       this.pen = 'data'
     }
+    dataB.onclick = () => {
+      this.pen = 'start'
+    }
     gateB.onclick = () => {
       this.pen = 'gate'
     }
@@ -74,9 +77,9 @@ export class Editor {
 
     setting.onchange = () => {
       if(this.currentItem instanceof Edge) {
-        this.currentItem.remaining = parseInt(settings.value)
+        this.currentItem.remaining = parseInt(setting.value)
       } else {
-        this.currentItem.opt = parseInt(settings.value)
+        this.currentItem.opt = parseInt(setting.value)
       }
     }
 
