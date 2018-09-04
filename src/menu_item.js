@@ -1,13 +1,19 @@
 export default class MenuItem {
-  constructor(text, pos, current = false) {
+  constructor(item, pos, current = false) {
     this.current = current
+    this.gameState = item.g
     this.pos = pos
-    this.text = text
+    this.text = item.t
   }
   d() {
     if(this.current) {
-      ctx.fillRect(this.pos.x, this.pos.y, 150, 50)
+      ctx.fillStyle = "#fff"
+      ctx.fillRect(this.pos.x-30, this.pos.y-30, 150, 50)
+      ctx.fillStyle = "#000"
+      ctx.fillText(this.text, this.pos.x, this.pos.y)
+    } else {
+      ctx.fillStyle = "#fff"
+      ctx.fillText(this.text, this.pos.x, this.pos.y)
     }
-    ctx.fillText(this.text, this.pos.x, this.pos.y)
   }
 }

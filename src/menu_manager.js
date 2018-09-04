@@ -8,11 +8,9 @@ export default class MenuManager {
     this.idle = true
     this.items = []
     items.forEach((item, i) => {
-      this.items.push(new MenuItem(item.text, new V2c(30, i * 30 + 50), i === 0))
+      this.items.push(new MenuItem(item, new V2c(30, i * 30 + 50), i === 0))
     })
   }
-
-
 
   d() {
     this.items.forEach((item) => {
@@ -35,6 +33,17 @@ export default class MenuManager {
         this.current ++
         this.wait()
       }
+      if(press[k.B]) {
+        window.gameState = this.items[this.current].gameState
+        this.wait()
+      }
     }
+    this.items.forEach((item,i) => {
+      if(i === this.current) {
+        item.current = true
+      } else {
+        item.current = false
+      }
+    })
   }
 }

@@ -1,5 +1,6 @@
 export default [
-  'Play',
-  'Menu select',
-  'Editor'
+  {t :'Play', g : 'play'},
+  {t :'Menu select', g : 'select'},
+  {t :'Editor', g : 'editor'},
+
 ]
