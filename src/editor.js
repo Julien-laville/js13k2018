@@ -4,32 +4,51 @@ import {Edge} from "./edge";
 
 export class Editor {
   constructor() {
-    this.w = 10
+
+      window.openEdit = () => {
+          editorC.style.display = 'block'
+      }
+
+
+      this.w = 10
     this.h = 10
     this.edges = []
     this.vertices = []
     this.pen = 'data'
+    this.toggleButton(dataB)
     this.currentItem = null
     this.penPos = new V2c()
+      closeEB.onclick = () => {
+        gameState='home'
+          editorC.style.display = 'none'
+      }
     dataB.onclick = () => {
       this.pen = 'data'
+      this.toggleButton(dataB)
     }
     startB.onclick = () => {
-      this.pen = 'start'
+        this.pen = 'start'
+        this.toggleButton(startB)
     }
-    endB.onclick = () => {
-      this.pen = 'end'
-    }
-    gateB.onclick = () => {
-      this.pen = 'gate'
-    }
-    ttlB.onclick = () => {
-      this.pen = 'ttl'
+      endB.onclick = () => {
+          this.toggleButton(endB)
+          this.pen = 'end'
+      }
+      gateB.onclick = () => {
+          this.toggleButton(gateB)
+          this.pen = 'gate'
+      }
+      ttlB.onclick = () => {
+          this.toggleButton(ttlB)
+          this.pen = 'ttl'
     }
 
 
 
     c.onclick = (e) => {
+      if(gameState !== 'editor') {
+        return
+      }
       if(this.pStance() < 6) {
         let p = new V2c(Math.floor((e.offsetX + 15) / 30) ,
           Math.floor((e.offsetY + 15) / 30))
@@ -41,7 +60,6 @@ export class Editor {
           this.vertices.push(v)
           this.currentItem = v
         }
-        this.updateCurrent()
       }
       /* edges */
 
@@ -62,8 +80,6 @@ export class Editor {
           this.edges.push(e)
           this.currentItem = e
         }
-
-        this.updateCurrent()
       }
 
       /* v lines */
@@ -79,13 +95,11 @@ export class Editor {
         let e = new Edge(f, to, 1)
         this.edges.push(e)
         this.currentItem = e
-        this.updateCurrent()
       }
 
       this.updateMap()
 
     }
-
     setting.onchange = () => {
       if(this.currentItem instanceof Edge) {
         this.currentItem.remaining = parseInt(setting.value)
@@ -105,6 +119,15 @@ export class Editor {
       this.penPos.set(e.offsetX, e.offsetY)
     }
   }
+
+
+    toggleButton(button) {
+      if(this.olButton) {
+        this.olButton.classList.remove('active')
+      }
+      this.olButton = button
+      button.classList.add('active')
+    }
 
   updateMap() {
     let mapValues = {
@@ -206,20 +229,6 @@ export class Editor {
     return new V2c(Math.floor((this.penPos.x + 15) / 30) * 30,
       Math.floor((this.penPos.y + 15) / 30) * 30).stance(new V2c(this.penPos.x, this.penPos.y))
   }
-
-
-  updateCurrent() {
-    if(this.currentItem instanceof Edge) {
-      setting.value = this.currentItem.remaining
-      type.innerHTML = 'Edge'
-    } else {
-      setting.value = this.currentItem.opt
-      type.innerHTML = 'Vertex'
-    }
-  }
-
-
-
 
 }
 

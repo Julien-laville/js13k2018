@@ -38,6 +38,9 @@ export default class MenuManager {
       }
       if(press[k.B]) {
         window.gameState = this.items[this.current].gameState
+          if(window.gameState === 'editor') {
+              openEdit()
+          }
         this.wait()
       }
     }

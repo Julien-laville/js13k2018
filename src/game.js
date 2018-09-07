@@ -1,7 +1,7 @@
 import MenuManager from "./menu_manager";
 import maps from './maps/maps'
-window.C_WIDTH = 400
-window.C_HEIGHT = 800
+window.C_WIDTH = 800
+window.C_HEIGHT = 400
 import P from './player'
 import W from './network'
 import k from './ctrl'
@@ -43,7 +43,7 @@ ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
 window.gameState = 'home'
 
 let homeMenu = new MenuManager('Disssconnected', home)
-let selectLevelMenu = new MenuManager('Select Level', home)
+let selectLevelMenu = new MenuManager('Select Level', maps)
 
 let ll = () => {
   c.width+=0
