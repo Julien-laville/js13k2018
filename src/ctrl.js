@@ -15,5 +15,6 @@ k.RIGHT = 68
 k.A = 16
 k.B = 32
 k.HELP = 72
+k.RESET = 82
 
 export default k

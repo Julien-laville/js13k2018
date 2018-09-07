@@ -4,18 +4,28 @@ import {Edge} from "./edge";
 
 class W {
   constructor(map) {
+    this.map = map
     this.w = map.w
     this.h = map.h
 
     this.vertices = []//[{pos : new V2c(0, 1), id : 0}, {pos : new V2c(1, 1), id : 1}]
     this.edges = []//[{from : new V2c(0, 1), to : new V2c(1, 1)}]
+    this.buildNetwork(this.map)
+  }
 
-    map.vertices.forEach((vertex) => {
+  reset() {
+    this.buildNetwork(this.map)
+  }
+
+  buildNetwork() {
+    this.vertices = []
+    this.edges = []
+    this.map.vertices.forEach((vertex) => {
       let pos = new V2c(vertex.id % this.w, Math.floor(vertex.id / this.w))
       this.vertices.push(new Vertex(pos, vertex.t, vertex.th))
     })
 
-    map.edges.forEach((edge) => {
+    this.map.edges.forEach((edge) => {
       let fromPos = new V2c(edge[0] % this.w, Math.floor(edge[0] / this.w))
       let toPos = new V2c(edge[1] % this.w, Math.floor(edge[1] / this.w))
       this.edges.push(new Edge(fromPos, toPos,  edge[2]))
@@ -29,9 +39,6 @@ class W {
     })
   }
 
-  k() {
-
-  }
 
   d() {
     this.edges.forEach((edge) => {

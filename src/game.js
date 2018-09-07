@@ -10,6 +10,8 @@ import Background from './background'
 import home from './menus/home'
 import Win from './menus/win'
 import Help from './menus/help'
+import Hint from './menus/hint'
+window.hint = new Hint()
 k()
 window.currentLevel = 0
 
@@ -51,20 +53,20 @@ let ll = () => {
     homeMenu.k()
     homeMenu.d()
   } else if(gameState === 'level-select') {
-
+    selectLevelMenu.k()
+    selectLevelMenu.d()
   } else if(gameState === 'play') {
-    p.k() // player
-    w.k() // world
+    p.k()
 
     w.d()
     p.d()
+    hint.d()
   } else if(gameState === 'editor'){
     editor.d()
   } else if(gameState === 'win') {
     win.d()
   } else if(gameState === 'help') {
     help.k().d()
-
   }
 
   requestAnimationFrame(ll)
