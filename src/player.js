@@ -1,8 +1,11 @@
 import V2c from "./lib/v2c";
 import k from './ctrl'
 class P {
-  constructor(map, network) {
+  constructor() {
     this.moving = false
+  }
+
+  setLevel(map, network) {
     this.w = map.w
     let start = map.vertices.find((vertex) =>
       vertex.t === 'start'
@@ -90,6 +93,9 @@ class P {
         if(vertex.pos.eq(this.pos) && vertex.type === 'data' && vertex.status !== false) {
           this.dataCount++
           vertex.consume()
+        }
+        if(vertex.pos.eq(this.pos) && vertex.type === 'end') {
+          nextLevel()
         }
       })
       setTimeout(() => {

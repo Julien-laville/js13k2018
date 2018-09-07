@@ -19,6 +19,11 @@ export class Vertex {
     ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
     ctx.fill()
   }
+
+  data(h) {
+    return {id : this.pos.x + this.pos.y * h, t : this.type, th : this.opt}
+  }
+
   d() {
     ctx.fillStyle = '#fff'
     if(this.type === 'data') {

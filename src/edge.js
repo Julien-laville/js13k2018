@@ -6,6 +6,10 @@ export class Edge {
     this.isUnlimited = remaining === -1
   }
 
+  data(h) {
+    return [this.from.x + this.from.y * h, this.to.x + this.to.y * h, this.remaining]
+  }
+
   d() {
     ctx.beginPath()
     ctx.moveTo(this.from.x * 30, this.from.y * 30)

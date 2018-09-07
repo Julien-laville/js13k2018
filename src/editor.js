@@ -8,18 +8,24 @@ export class Editor {
     this.h = 10
     this.edges = []
     this.vertices = []
-    this.pen = null
+    this.pen = 'data'
     this.currentItem = null
     this.penPos = new V2c()
     dataB.onclick = () => {
       this.pen = 'data'
     }
-    dataB.onclick = () => {
+    startB.onclick = () => {
       this.pen = 'start'
+    }
+    endB.onclick = () => {
+      this.pen = 'end'
     }
     gateB.onclick = () => {
       this.pen = 'gate'
     }
+
+
+
     c.onclick = (e) => {
       if(this.pStance() < 6) {
         let p = new V2c(Math.floor((e.offsetX + 15) / 30) ,
@@ -73,6 +79,8 @@ export class Editor {
         this.updateCurrent()
       }
 
+      this.updateMap()
+
     }
 
     setting.onchange = () => {
@@ -81,12 +89,28 @@ export class Editor {
       } else {
         this.currentItem.opt = parseInt(setting.value)
       }
+      //this.update()
     }
 
 
     c.onmousemove = (e) => {
       this.penPos.set(e.offsetX, e.offsetY)
     }
+  }
+
+  updateMap() {
+    let mapValues = {
+      w : this.w,
+      h : this.h,
+      edges: this.edges.map((edge) => {
+        return edge.data(this.h)
+      }),
+      vertices:
+        this.vertices.map((vertex) => {
+          return vertex.data(this.h)
+        })
+    }
+    mapData.value = JSON.stringify(mapValues)
   }
 
   d() {
@@ -183,8 +207,9 @@ export class Editor {
       setting.value = this.currentItem.opt
       type.innerHTML = 'Vertex'
     }
-
   }
+
+
 
 
 }

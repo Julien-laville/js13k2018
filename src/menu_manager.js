@@ -3,7 +3,8 @@ import V2c from "./lib/v2c";
 import k from "./ctrl";
 
 export default class MenuManager {
-  constructor(items) {
+  constructor(title, items) {
+    this.title = title
     this.current = 0
     this.idle = true
     this.items = []
@@ -13,6 +14,8 @@ export default class MenuManager {
   }
 
   d() {
+    ctx.fillStyle = "#fff"
+    ctx.fillText(this.title, 30,10)
     this.items.forEach((item) => {
       item.d()
     })

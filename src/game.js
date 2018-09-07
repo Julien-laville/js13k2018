@@ -9,13 +9,25 @@ import k from './ctrl'
 import {Editor} from './editor'
 import Background from './background'
 import home from './menus/home'
+import Win from './win'
 k()
-window.currentLevel = 0
+window.currentLevel = 1
 
+const win = new Win()
+const editor = new Editor()
+let w = new W(maps[currentLevel])
+window.p = new P()
+window.p.setLevel(maps[currentLevel], w)
 
-const editor = new Editor
-const w = new W(maps[currentLevel])
-window.p = new P(maps[currentLevel], w)
+window.nextLevel = () => {
+  currentLevel++
+  if(currentLevel === maps.length) {
+    window.gameState = 'win'
+    return
+  }
+  w = new W(maps[currentLevel])
+  window.p.setLevel(maps[currentLevel], w)
+}
 
 const background = new Background()
 window.ctx = c.getContext('2d')
@@ -28,7 +40,7 @@ ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
 window.gameState = 'home'
 
 let homeMenu = new MenuManager('Disssconnected', home)
-let selectLevelMenu = new MenuManager('', home, 2)
+let selectLevelMenu = new MenuManager('Select Level', home)
 
 let ll = () => {
   c.width+=0
@@ -47,6 +59,8 @@ let ll = () => {
     p.d()
   } else if(gameState === 'editor'){
     editor.d()
+  } else if(gameState === 'win') {
+    win.d()
   }
 
   requestAnimationFrame(ll)
