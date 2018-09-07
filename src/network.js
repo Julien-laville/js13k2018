@@ -30,10 +30,10 @@ class W {
       let toPos = new V2c(edge[1] % this.w, Math.floor(edge[1] / this.w))
       this.edges.push(new Edge(fromPos, toPos,  edge[2]))
 
-      if(!this.vertices.find((node) => node.x === fromPos.x && node.y === fromPos.y)) {
+      if(!this.vertices.find((node) => node.pos.eq(fromPos))) {
         this.vertices.push(new Vertex(fromPos, 'n'))
       }
-      if(!this.vertices.find((node) => node.x === toPos.x && node.y === toPos.y)) {
+      if(!this.vertices.find((node) => node.pos.eq(toPos))) {
         this.vertices.push(new Vertex(toPos))
       }
     })
