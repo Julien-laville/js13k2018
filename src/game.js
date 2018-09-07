@@ -1,19 +1,20 @@
 import MenuManager from "./menu_manager";
 import maps from './maps/maps'
-const C_WIDTH = 400
-const C_HEIGHT = 800
-window.log=(m)=>console.log(m)
+window.C_WIDTH = 400
+window.C_HEIGHT = 800
 import P from './player'
 import W from './network'
 import k from './ctrl'
 import {Editor} from './editor'
 import Background from './background'
 import home from './menus/home'
-import Win from './win'
+import Win from './menus/win'
+import Help from './menus/help'
 k()
-window.currentLevel = 1
+window.currentLevel = 0
 
 const win = new Win()
+const help = new Help()
 const editor = new Editor()
 let w = new W(maps[currentLevel])
 window.p = new P()
@@ -61,6 +62,9 @@ let ll = () => {
     editor.d()
   } else if(gameState === 'win') {
     win.d()
+  } else if(gameState === 'help') {
+    help.k().d()
+
   }
 
   requestAnimationFrame(ll)

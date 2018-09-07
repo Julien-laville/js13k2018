@@ -19,6 +19,10 @@ class P {
   }
 
   k() {
+    if(press[k.HELP]) {
+      window.gameState = 'help'
+    }
+
     if(!this.moving) {
       let futureRoute
       if(press[k.LEFT]) {
