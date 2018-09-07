@@ -23,6 +23,9 @@ export class Editor {
     gateB.onclick = () => {
       this.pen = 'gate'
     }
+    ttlB.onclick = () => {
+      this.pen = 'ttl'
+    }
 
 
 
@@ -89,7 +92,12 @@ export class Editor {
       } else {
         this.currentItem.opt = parseInt(setting.value)
       }
-      //this.update()
+      this.update()
+    }
+
+    ttl.onchange = () => {
+      this.ttl = parseInt(ttl.value)
+      this.updateMap()
     }
 
 
@@ -100,6 +108,7 @@ export class Editor {
 
   updateMap() {
     let mapValues = {
+      ttl : this.ttl,
       w : this.w,
       h : this.h,
       edges: this.edges.map((edge) => {

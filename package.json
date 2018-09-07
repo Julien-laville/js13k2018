@@ -5,7 +5,8 @@
   "main": "game.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack -w --mode development"
+    "watch": "webpack -w --mode development",
+    "prod": "webpack --mode production"
   },
   "author": "Julien-Laville",
   "license": "MIT",

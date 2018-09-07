@@ -14,7 +14,7 @@ class P {
 
     this.edges = network.edges
     this.vertices = network.vertices
-
+    this.ttl = map.ttl
     this.dataCount = 0
   }
 
@@ -71,10 +71,14 @@ class P {
   }
 
   isRouteExist(route) {
-    let edge =  this.edges.find((edge) => {
+    this.ttl --
+    if(ttl === 0) {
+      return false
+      show
+    }
+    return this.edges.find((edge) => {
       return (edge.from.eq(route.from) && edge.to.eq(route.to)) || (edge.from.eq(route.to) && edge.to.eq(route.from))
-    });
-    return edge
+    })
   }
 
 
@@ -88,23 +92,23 @@ class P {
     }
     ctx.fill()
     ctx.fillStyle = "#fff"
-    ctx.fillText(this.dataCount, this.pos.x * 30 + 10, this.pos.y * 30 - 10)
+    ctx.fillText(this.ttl, this.pos.x * 30 + 10, this.pos.y * 30 - 10)
   }
 
   move() {
-      this.moving = true
-      this.vertices.forEach((vertex) => {
-        if(vertex.pos.eq(this.pos) && vertex.type === 'data' && vertex.status !== false) {
-          this.dataCount++
-          vertex.consume()
-        }
-        if(vertex.pos.eq(this.pos) && vertex.type === 'end') {
-          nextLevel()
-        }
-      })
-      setTimeout(() => {
-          this.moving = false
-      }, 250)
+    this.moving = true
+    this.vertices.forEach((vertex) => {
+      if(vertex.pos.eq(this.pos) && vertex.type === 'data' && vertex.status !== false) {
+        this.dataCount++
+        vertex.consume()
+      }
+      if(vertex.pos.eq(this.pos) && vertex.type === 'end') {
+        nextLevel()
+      }
+    })
+    setTimeout(() => {
+        this.moving = false
+    }, 250)
   }
 }
 

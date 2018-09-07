@@ -12,7 +12,7 @@ export default class Win {
     this.cd -= .4
     ctx.fillText('You win', 10, this.cd)
     for(let i = 0; i < this.credits.length; i++) {
-      ctx.fillText(this.credits[i], 10, this.cd + i * 20)
+      ctx.fillText(this.credits[i], 10, this.cd + i * 20 + 20)
     }
   }
 }
