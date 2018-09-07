@@ -22,6 +22,8 @@ class P {
 
   reset() {
     this.network.reset()
+    this.edges = this.network.edges
+    this.vertices = this.network.vertices
     let start = this.map.vertices.find((vertex) =>
       vertex.t === 'start'
     )
