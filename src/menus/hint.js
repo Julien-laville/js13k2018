@@ -16,13 +16,16 @@ export default class Hint {
   }
 
   show(hint) {
+    if(this.handle) {
+      clearTimeout(this.handle)
+    }
     this.active = true
     if(this.hints[hint].used) {
       return false
     }
     this.currentHint = this.hints[hint]
     this.currentHint.used = true
-    setTimeout(() => {this.active = false}, 5000)
+    this.handle = setTimeout(() => {this.active = false}, 5000)
     return true
   }
 

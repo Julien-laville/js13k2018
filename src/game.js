@@ -32,6 +32,12 @@ window.nextLevel = () => {
   window.p.setLevel(maps[currentLevel], w)
 }
 
+window.setLevel = (l) => {
+    window.currentLevel = l
+    w = new W(maps[currentLevel])
+    window.p.setLevel(maps[currentLevel], w)
+}
+
 const background = new Background()
 window.ctx = c.getContext('2d')
 
@@ -43,7 +49,7 @@ ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
 window.gameState = 'home'
 
 let homeMenu = new MenuManager('Disssconnected', home)
-let selectLevelMenu = new MenuManager('Select Level', maps)
+let selectLevelMenu = new MenuManager('Select Level', maps, true)
 hint.show(2)
 let ll = () => {
   c.width+=0
@@ -53,7 +59,7 @@ let ll = () => {
     homeMenu.k()
     hint.d(2)
     homeMenu.d()
-  } else if(gameState === 'level-select') {
+  } else if(gameState === 'select') {
     selectLevelMenu.k()
     selectLevelMenu.d()
   } else if(gameState === 'play') {

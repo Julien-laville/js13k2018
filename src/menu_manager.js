@@ -1,16 +1,23 @@
 import MenuItem from "./menu_item";
 import V2c from "./lib/v2c";
 import k from "./ctrl";
-
+window.imageridle = true
 export default class MenuManager {
-  constructor(title, items) {
+  constructor(title, items, isLevel) {
     this.title = title
+    this.isLevel = isLevel
     this.current = 0
-    this.idle = true
+
     this.items = []
-    items.forEach((item, i) => {
-      this.items.push(new MenuItem(item, new V2c(30, i * 30 + 50), i === 0))
-    })
+      if(this.isLevel) {
+          items.forEach((item, i) => {
+              this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(30, i * 30 + 50), i === 0))
+          })
+      } else {
+          items.forEach((item, i) => {
+              this.items.push(new MenuItem(item, new V2c(30, i * 30 + 50), i === 0))
+          })
+      }
   }
 
   d() {
@@ -21,14 +28,14 @@ export default class MenuManager {
     })
   }
   wait() {
-    this.idle = false
+    window.imageridle = false
     setTimeout(() => {
-      this.idle = true
+      window.imageridle = true
     }, 150)
   }
 
   k() {
-    if(this.idle) {
+    if(window.imageridle) {
       if(press[k.UP]) {
         if(this.current > 0) {
           this.current --
@@ -41,10 +48,15 @@ export default class MenuManager {
         this.wait()
       }
       if(press[k.B]) {
-        window.gameState = this.items[this.current].gameState
-          if(window.gameState === 'editor') {
-              openEdit()
-          }
+        if(this.isLevel) {
+            setLevel(this.current)
+            window.gameState = 'play'
+        } else {
+            window.gameState = this.items[this.current].gameState
+        }
+        if(window.gameState === 'editor') {
+          openEdit()
+        }
         this.wait()
       }
     }
