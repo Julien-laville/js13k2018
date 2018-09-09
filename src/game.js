@@ -44,14 +44,13 @@ window.gameState = 'home'
 
 let homeMenu = new MenuManager('Disssconnected', home)
 let selectLevelMenu = new MenuManager('Select Level', maps)
-
+hint.show(2)
 let ll = () => {
   c.width+=0
   background.l()
   background.d()
   if(gameState === 'home') {
     homeMenu.k()
-    hint.show(2)
     hint.d(2)
     homeMenu.d()
   } else if(gameState === 'level-select') {

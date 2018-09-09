@@ -30,10 +30,14 @@ export default class MenuManager {
   k() {
     if(this.idle) {
       if(press[k.UP]) {
-        this.current --
+        if(this.current > 0) {
+          this.current --
+        }
         this.wait()
       } if(press[k.DOWN]) {
-        this.current ++
+        if(this.current < this.items.length - 1) {
+          this.current ++
+        }
         this.wait()
       }
       if(press[k.B]) {
