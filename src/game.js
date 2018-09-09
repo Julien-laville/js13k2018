@@ -51,6 +51,8 @@ let ll = () => {
   background.d()
   if(gameState === 'home') {
     homeMenu.k()
+    hint.show(2)
+    hint.d(2)
     homeMenu.d()
   } else if(gameState === 'level-select') {
     selectLevelMenu.k()

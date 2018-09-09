@@ -3,6 +3,7 @@ export default class Hint {
     this.hints = [
       {m:'Press WASD or ZQSD for moving, SPACE for action H in game for help'},
       {m:'Press R to reset level'},
+      {m:'Use [Z/W] & [S] to move Up and Down, Select with [Space]'}
     ]
   }
   d() {
