@@ -42,6 +42,10 @@ export class Editor {
         this.toggleButton(ttlB)
         this.pen = 'ttl'
       }
+    ttlB.onclick = () => {
+      this.toggleButton(beaconB)
+      this.pen = 'beacon'
+    }
 
 
 
