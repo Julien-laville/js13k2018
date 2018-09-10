@@ -5,13 +5,33 @@
   #editorC {
     position: absolute;
     right: 0;
+    background: #2b3034;
+    font-family: sans-serif;
   }
   button {
     width: 50px;
     height: 50px;
+    background: none;
+    border: 1px solid #1793d8;
+    margin-top: 3px;
+    color:#1793d8;
   }
   .active {
-    background: darkgreen;
+    background: #1799df;
+    color: #090b0d;
+  }
+  i {
+    font-style: normal;
+    color: #67727c;
+    display: inline-block;
+    width: 80px;
+  }
+  input {
+    border: none;
+    border-bottom: 2px #444 solid;
+    background: none;
+    padding: 6px;
+    color: #444
   }
 </style>
 <meta charset="UTF-8">
@@ -24,10 +44,10 @@
   <br>
   <button id="ttlB">TTL</button>
   <br>
-  <i id="type"></i>
+  <i id="settingI"></i>
   <input id="setting">
   <br>
-  TTL <input id="ttl">
+  <i>TTL</i><input id="ttl">
   <br>
   <textarea id="mapData"></textarea>
   <button id="closeEB"></button>

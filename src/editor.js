@@ -4,8 +4,7 @@ import {Edge} from "./edge";
 
 export class Editor {
   constructor() {
-
-      window.openEdit = () => {
+    window.openEdit = () => {
           editorC.style.display = 'block'
       }
 
@@ -18,30 +17,36 @@ export class Editor {
     this.toggleButton(dataB)
     this.currentItem = null
     this.penPos = new V2c()
-      closeEB.onclick = () => {
-        gameState='home'
-          editorC.style.display = 'none'
-      }
+    closeEB.onclick = () => {
+      this.setText('')
+      gameState='home'
+        editorC.style.display = 'none'
+    }
     dataB.onclick = () => {
       this.pen = 'data'
       this.toggleButton(dataB)
+      this.setText('')
     }
     startB.onclick = () => {
         this.pen = 'start'
-        this.toggleButton(startB)
+      this.toggleButton(startB)
+      this.setText('')
     }
       endB.onclick = () => {
-          this.toggleButton(endB)
-          this.pen = 'end'
+        this.toggleButton(endB)
+        this.pen = 'end'
+        this.setText('')
       }
       gateB.onclick = () => {
-          this.toggleButton(gateB)
-          this.pen = 'gate'
+        this.toggleButton(gateB)
+        this.pen = 'gate'
+        this.setText('Threshold')
       }
       ttlB.onclick = () => {
-          this.toggleButton(ttlB)
-          this.pen = 'ttl'
-    }
+        this.toggleButton(ttlB)
+        this.pen = 'ttl'
+        this.setText('Boost')
+      }
 
 
 
@@ -80,6 +85,7 @@ export class Editor {
           this.edges.push(e)
           this.currentItem = e
         }
+        this.setText('lifespan')
       }
 
       /* v lines */
@@ -93,8 +99,14 @@ export class Editor {
         let f = new V2c(fx, fy)
         let to = new V2c(fx, fy + 1)
         let e = new Edge(f, to, 1)
-        this.edges.push(e)
-        this.currentItem = e
+        let efind = this.edges.find(edge => (edge.from.eq(f) && edge.to.eq(to)))
+        if(efind) {
+          this.currentItem = efind
+        } else {
+          this.edges.push(e)
+          this.currentItem = e
+        }
+        this.setText('lifespan')
       }
 
       this.updateMap()
@@ -224,6 +236,16 @@ export class Editor {
     }
 
 
+  }
+
+  setText(text) {
+    if(text === '') {
+      settingI.innerHTML = ''
+      setting.style.display = 'none'
+    } else {
+      settingI.innerHTML = text
+      setting.style.display = 'inline-block'
+    }
   }
   pStance() {
     return new V2c(Math.floor((this.penPos.x + 15) / 30) * 30,

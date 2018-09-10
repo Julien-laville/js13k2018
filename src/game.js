@@ -48,7 +48,7 @@ ctx.fillStyle = '#000'
 ctx.fillRect(0,0,C_WIDTH,C_HEIGHT)
 window.gameState = 'home'
 
-let homeMenu = new MenuManager('Disssconnected', home)
+let homeMenu = new MenuManager('Silent Network', home)
 let selectLevelMenu = new MenuManager('Select Level', maps, true)
 hint.show(2)
 let ll = () => {
