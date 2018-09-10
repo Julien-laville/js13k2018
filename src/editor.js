@@ -25,27 +25,22 @@ export class Editor {
     dataB.onclick = () => {
       this.pen = 'data'
       this.toggleButton(dataB)
-      this.setText('')
     }
     startB.onclick = () => {
         this.pen = 'start'
       this.toggleButton(startB)
-      this.setText('')
     }
       endB.onclick = () => {
         this.toggleButton(endB)
         this.pen = 'end'
-        this.setText('')
       }
       gateB.onclick = () => {
         this.toggleButton(gateB)
         this.pen = 'gate'
-        this.setText('Threshold')
       }
       ttlB.onclick = () => {
         this.toggleButton(ttlB)
         this.pen = 'ttl'
-        this.setText('Boost')
       }
 
 
@@ -65,6 +60,19 @@ export class Editor {
           this.vertices.push(v)
           this.currentItem = v
         }
+        switch(this.currentItem.type) {
+          case 'gate':
+            this.setText('Threshold')
+            setting.value = this.currentItem.opt
+            break;
+          case 'ttl':
+            this.setText('TTL Boost')
+            setting.value = this.currentItem.opt
+            break;
+          default:
+            this.setText('')
+
+        }
       }
       /* edges */
 
@@ -77,11 +85,13 @@ export class Editor {
         let fy = Math.floor((this.penPos.y + 15) / 30)
         let f = new V2c(fx, fy)
         let to = new V2c(fx + 1, fy)
-        let e = new Edge(f, to, 1)
         let efind = this.edges.find(edge => (edge.from.eq(f) && edge.to.eq(to)))
         if(efind) {
           this.currentItem = efind
+          setting.value = efind.remaining
         } else {
+          setting.value = 1
+          let e = new Edge(f, to, 1)
           this.edges.push(e)
           this.currentItem = e
         }
@@ -98,11 +108,13 @@ export class Editor {
         let fy = Math.floor((this.penPos.y ) / 30)
         let f = new V2c(fx, fy)
         let to = new V2c(fx, fy + 1)
-        let e = new Edge(f, to, 1)
         let efind = this.edges.find(edge => (edge.from.eq(f) && edge.to.eq(to)))
         if(efind) {
           this.currentItem = efind
+          setting.value = efind.remaining
         } else {
+          setting.value = 1
+          let e = new Edge(f, to, 1)
           this.edges.push(e)
           this.currentItem = e
         }
@@ -118,7 +130,7 @@ export class Editor {
       } else {
         this.currentItem.opt = parseInt(setting.value)
       }
-      this.update()
+      this.updateMap()
     }
 
     ttl.onchange = () => {
