@@ -55,14 +55,15 @@ export class Vertex {
         ctx.setLineDash([4, 2, 2, 2])
         ctx.stroke()
     } else if(this.type === 'end') {
-        ctx.fillStyle = '#09127f'
-        ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-        ctx.fill()
+      ctx.fillStyle = '#09127f'
+      ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+      ctx.fill()
     } else {
       ctx.beginPath()
       ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
       ctx.fill()
     }
+
   }
   consume() {
     this.consumed = true

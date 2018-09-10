@@ -1,8 +1,10 @@
 import V2c from "./lib/v2c";
 import k from './ctrl'
+import {Beacon} from "./beacon";
 class P {
   constructor() {
     this.moving = false
+    this.beacon = new Beacon()
   }
 
   setLevel(map, network) {
@@ -18,6 +20,7 @@ class P {
     this.ttl = map.ttl
     this.network = network
     this.dataCount = 0
+    this.beacon.reset()
   }
 
   reset() {
@@ -32,12 +35,17 @@ class P {
   }
 
   k() {
+    this.beacon.k()
     if(press[k.HELP]) {
       window.gameState = 'help'
     }
 
     if(press[k.RESET]) {
       this.reset()
+    }
+
+    if(press[k.A]) {
+      this.beacon.placeBeacon(this.pos)
     }
 
     if(!this.moving) {
@@ -51,7 +59,6 @@ class P {
         }
       }
       if(press[k.RIGHT]) {
-        console.log("right")
         let p = this.pos.cadd(1,0)
         futureRoute = {from : this.pos, to : p}
         if(this.checkMove(futureRoute)) {
@@ -105,6 +112,7 @@ class P {
 
 
   d() {
+    this.beacon.d()
     ctx.beginPath()
     ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
     if(this.move) {
@@ -123,6 +131,7 @@ class P {
       this.moving = false
     }, 250)
   }
+
 
   move() {
     this.vertices.forEach((vertex) => {
