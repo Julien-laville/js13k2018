@@ -6,6 +6,7 @@ export default class MenuItem {
     this.text = item.t
   }
   d() {
+    ctx.font = '22px Arial'
     if(this.current) {
       ctx.fillStyle = "#fff"
       ctx.fillRect(this.pos.x-30, this.pos.y-30, 150, 50)

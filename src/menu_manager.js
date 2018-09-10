@@ -11,18 +11,19 @@ export default class MenuManager {
     this.items = []
       if(this.isLevel) {
           items.forEach((item, i) => {
-              this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(30, i * 30 + 50), i === 0))
+              this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(30, i * 50 + 100), i === 0))
           })
       } else {
           items.forEach((item, i) => {
-              this.items.push(new MenuItem(item, new V2c(30, i * 30 + 50), i === 0))
+              this.items.push(new MenuItem(item, new V2c(30, i * 50  + 100), i === 0))
           })
       }
   }
 
   d() {
+    ctx.font = '32px Arial'
     ctx.fillStyle = "#fff"
-    ctx.fillText(this.title, 30,10)
+    ctx.fillText(this.title, 40,40)
     this.items.forEach((item) => {
       item.d()
     })

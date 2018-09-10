@@ -13,6 +13,14 @@ class P {
     let start = map.vertices.find((vertex) =>
       vertex.t === 'start'
     )
+    this.totalDataCount = 0
+    map.vertices.forEach((vertex) => {
+        if (vertex.t === 'data') {
+          this.totalDataCount++
+        }
+      }
+    )
+
     this.pos = new V2c(start.id % this.w, Math.floor(start.id / this.w))
 
     this.edges = network.edges
@@ -123,6 +131,28 @@ class P {
     ctx.fill()
     ctx.fillStyle = "#fff"
     ctx.fillText(this.ttl, this.pos.x * 30 + 10, this.pos.y * 30 - 10)
+
+    /* draw ttl */
+    for(let i = 0; i < this.ttl; i++) {
+      ctx.fillStyle="#3e70ea"
+      ctx.fillRect(10 + 8 * i, 10, 4 , 4)
+    }
+    /* draw data */
+    for(let i = 0 ; i < this.totalDataCount; i ++) {
+      ctx.fillStyle="#3e70ea"
+      if(i >= this.dataCount) {
+        ctx.beginPath()
+        ctx.rect(10 + 12 * i, 20, 8 , 8)
+        ctx.strokeStyle="#4671f7"
+        ctx.setLineDash([])
+        ctx.stroke()
+      } else {
+        ctx.fillStyle="#4671f7"
+        ctx.fillRect(10 + 12 * i, 20, 8 , 8)
+      }
+    }
+
+
   }
 
   handleMove() {

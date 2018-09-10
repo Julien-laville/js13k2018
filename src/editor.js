@@ -5,11 +5,9 @@ import {Edge} from "./edge";
 export class Editor {
   constructor() {
     window.openEdit = () => {
-          editorC.style.display = 'block'
-      }
-
-
-      this.w = 10
+      editorC.style.display = 'block'
+    }
+    this.w = 24
     this.h = 10
     this.edges = []
     this.vertices = []
@@ -178,7 +176,7 @@ export class Editor {
         ctx.stroke()
       }
     }
-    for(let i = 0; i < this.w; i ++) {
+    for(let i = 0; i < this.h; i ++) {
       ctx.beginPath()
       ctx.moveTo(0, 30 * i)
       ctx.lineTo(this.w * 30 - 30, 30 * i)
@@ -186,7 +184,7 @@ export class Editor {
       ctx.stroke()
     }
 
-    for(let i = 0; i < this.h; i ++) {
+    for(let i = 0; i < this.w; i ++) {
       ctx.beginPath()
       ctx.moveTo(30 * i, 0)
       ctx.lineTo(30 * i, this.h * 30 - 30)
