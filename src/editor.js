@@ -156,11 +156,11 @@ export class Editor {
       w : this.w,
       h : this.h,
       edges: this.edges.map((edge) => {
-        return edge.data(this.h)
+        return edge.data(this.w)
       }),
       vertices:
         this.vertices.map((vertex) => {
-          return vertex.data(this.h)
+          return vertex.data(this.w)
         })
     }
     mapData.value = JSON.stringify(mapValues)

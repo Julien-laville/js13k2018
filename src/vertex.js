@@ -26,8 +26,8 @@ export class Vertex {
     ctx.fill()
   }
 
-  data(h) {
-    return {id : this.pos.x + this.pos.y * h, t : this.type, th : this.opt}
+  data(w) {
+    return {id : this.pos.x + this.pos.y * w, t : this.type, th : this.opt}
   }
 
   d() {
@@ -67,6 +67,10 @@ export class Vertex {
   }
   consume() {
     this.consumed = true
+  }
+
+  reboot() {
+
   }
 
 }

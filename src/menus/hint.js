@@ -27,7 +27,7 @@ export default class Hint {
     }
     this.currentHint = this.hints[hint]
     this.currentHint.used = true
-    this.handle = setTimeout(() => {this.active = false}, 5000)
+    this.handle = setTimeout(() => {this.active = false}, 15000)
     return true
   }
 

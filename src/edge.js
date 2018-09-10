@@ -17,7 +17,7 @@ export class Edge {
     if(this.isUnlimited) {
       ctx.strokeStyle = "#78ff3b"
     } else if(this.remaining === 1) {
-      ctx.strokeStyle = "#41c"
+      ctx.strokeStyle = "#3916cc"
     } else if(this.remaining === 0){
       ctx.strokeStyle = "rgba(68,17,204,0.2)"
     }
@@ -48,5 +48,9 @@ export class Edge {
 
   isAvailable() {
     return this.isUnlimited || this.remaining > 0
+  }
+
+  reboot() {
+
   }
 }

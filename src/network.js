@@ -49,7 +49,15 @@ class W {
     })
   }
 
-
+  /* sfx */
+  reboot() {
+    this.edges.forEach((edge) => {
+      edge.reboot()
+    })
+    this.vertices.forEach((vertex) => {
+      vertex.reboot()
+    })
+  }
 }
 
 export default W
