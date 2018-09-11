@@ -11,6 +11,7 @@ import home from './menus/home'
 import Win from './menus/win'
 import Help from './menus/help'
 import Hint from './menus/hint'
+import Story from "./menus/story";
 window.hint = new Hint()
 k()
 window.currentLevel = 0
@@ -20,22 +21,31 @@ const help = new Help()
 const editor = new Editor()
 let w = new W(maps[currentLevel])
 window.p = new P()
-window.p.setLevel(maps[currentLevel], w)
+p.setLevel(maps[currentLevel], w)
+
+const s = new Story()
 
 window.nextLevel = () => {
   currentLevel++
   if(currentLevel === maps.length) {
-    window.gameState = 'win'
+    gameState = 'win'
     return
   }
   w = new W(maps[currentLevel])
-  window.p.setLevel(maps[currentLevel], w)
+  p.setLevel(maps[currentLevel], w)
+  s.set()
+}
+
+window.startLevel = () => {
+  w.boot()
 }
 
 window.setLevel = (l) => {
-    window.currentLevel = l
-    w = new W(maps[currentLevel])
-    window.p.setLevel(maps[currentLevel], w)
+  gameState = 'play'
+  currentLevel = l
+  w = new W(maps[currentLevel])
+  p.setLevel(maps[currentLevel], w)
+  s.set()
 }
 
 const background = new Background()
@@ -63,11 +73,14 @@ let ll = () => {
     selectLevelMenu.k()
     selectLevelMenu.d()
   } else if(gameState === 'play') {
+    s.k()
     p.k()
+    w.k()
 
     w.d()
     p.d()
     hint.d()
+    s.d()
   } else if(gameState === 'editor'){
     editor.d()
   } else if(gameState === 'win') {

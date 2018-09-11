@@ -4,6 +4,9 @@ export class Vertex {
     this.type = type
     this.opt = opt
     this.consumed = false
+    this.fa = 0
+    this.a = 0
+    this.status = 'off'
   }
 
   de() {
@@ -31,7 +34,7 @@ export class Vertex {
   }
 
   d() {
-    ctx.fillStyle = '#fff'
+    ctx.fillStyle = `rgba(255,255,255,${this.a})`
     if(this.type === 'data') {
       if(this.consumed) {
         ctx.fillStyle = '#811'
@@ -44,10 +47,10 @@ export class Vertex {
         ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
         if (p.dataCount >= this.opt) {
             ctx.strokeStyle = "#294"
-            ctx.fillStyle = "#294"
+            ctx.fillStyle = `rgba(30,150,170,${this.a})`
         } else {
             ctx.strokeStyle = "#911"
-            ctx.fillStyle = "#911"
+            ctx.fillStyle = `rgba(150,17,17,${this.a})`
         }
         ctx.fill()
         ctx.beginPath()
@@ -55,7 +58,7 @@ export class Vertex {
         ctx.setLineDash([4, 2, 2, 2])
         ctx.stroke()
     } else if(this.type === 'end') {
-      ctx.fillStyle = '#09127f'
+      ctx.fillStyle = `rgba(9,18,127,${this.a})`
       ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
       ctx.fill()
     } else {
@@ -69,8 +72,30 @@ export class Vertex {
     this.consumed = true
   }
 
-  reboot() {
+  boot() {
+    this.a = 0
+    this.fa = 0
+    this.lastUpdate = new Date().getTime()
+    this.status = 'booting'
+  }
 
+  k() {
+    if(this.status === 'booting') {
+      let d = new Date().getTime() - this.lastUpdate
+      this.fa = this.fa + d / 100
+      console.log(this.fa)
+      if(this.fa > 0) {
+        this.a = 1
+        this.status = 'on'
+      } else {
+        this.a = this.fa
+      }
+      this.lastUpdate  = new Date().getTime()
+    }
+  }
+
+  reboot() {
+    this.boot()
   }
 
 }

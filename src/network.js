@@ -39,6 +39,15 @@ class W {
     })
   }
 
+  k() {
+    this.edges.forEach((edge) => {
+      edge.k()
+    })
+    this.vertices.forEach((vertex) => {
+      vertex.k()
+    })
+  }
+
 
   d() {
     this.edges.forEach((edge) => {
@@ -50,12 +59,22 @@ class W {
   }
 
   /* sfx */
+
   reboot() {
     this.edges.forEach((edge) => {
       edge.reboot()
     })
     this.vertices.forEach((vertex) => {
       vertex.reboot()
+    })
+  }
+
+  boot() {
+    this.edges.forEach((edge) => {
+      edge.boot()
+    })
+    this.vertices.forEach((vertex) => {
+      vertex.boot()
     })
   }
 }

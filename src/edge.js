@@ -4,6 +4,8 @@ export class Edge {
     this.to = to
     this.remaining = remaining
     this.isUnlimited = remaining === -1
+    this.a = 0
+    this.fa = 0
   }
 
   data(h) {
@@ -15,12 +17,11 @@ export class Edge {
     ctx.moveTo(this.from.x * 30, this.from.y * 30)
     ctx.lineTo(this.to.x * 30, this.to.y * 30)
     if(this.isUnlimited) {
-      ctx.strokeStyle = "#78ff3b"
+      ctx.strokeStyle = `rgba(120,255,59,${this.a})`
     } else if(this.remaining === 1) {
-      ctx.strokeStyle = "#3916cc"
+      ctx.strokeStyle = `rgba(57,22,207,${this.a})`
     } else if(this.remaining === 0){
-      ctx.strokeStyle = "rgba(68,17,204,0.2)"
-    }
+      ctx.strokeStyle = `rgba(68,17,204,${this.a})`    }
     ctx.lineWidth = 5
     ctx.stroke()
     ctx.lineWidth = 1
@@ -42,6 +43,22 @@ export class Edge {
     ctx.lineWidth = 1
   }
 
+  k() {
+    if(this.status === 'booting') {
+      let d = new Date().getTime() - this.lastUpdate
+      this.fa = this.fa + d / 1000
+      if(this.fa > 1) {
+        this.a = 1
+        this.status = 'on'
+      } else {
+        this.a = this.fa
+      }
+
+      this.lastUpdate  = new Date().getTime()
+    }
+
+  }
+
   consume() {
     this.remaining--
   }
@@ -50,7 +67,16 @@ export class Edge {
     return this.isUnlimited || this.remaining > 0
   }
 
-  reboot() {
+  boot() {
+    this.status = 'booting'
+    this.a = 0
+    this.fa = 0
+    this.lastUpdate = new Date().getTime()
+  }
 
+  reboot() {
+    this.a = 0
+    this.fa = 0
+    this.boot()
   }
 }

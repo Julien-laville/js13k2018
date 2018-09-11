@@ -52,8 +52,10 @@ export default class MenuManager {
         if(this.isLevel) {
             setLevel(this.current)
             window.gameState = 'play'
+        } else if(this.items[this.current].gameState === 'play') {
+          setLevel(0)
         } else {
-            window.gameState = this.items[this.current].gameState
+          window.gameState = this.items[this.current].gameState
         }
         if(window.gameState === 'editor') {
           openEdit()
