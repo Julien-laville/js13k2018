@@ -49,7 +49,6 @@ class W {
     })
   }
 
-
   d() {
     this.edges.forEach((edge) => {
       edge.d()

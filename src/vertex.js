@@ -73,7 +73,6 @@ export class Vertex {
   }
 
   boot() {
-    console.log('booot')
     this.a = 0
     this.fa = 0
     this.lastUpdate = new Date().getTime()
@@ -83,8 +82,8 @@ export class Vertex {
   k() {
     if(this.status === 'booting') {
       let d = new Date().getTime() - this.lastUpdate
-      this.fa = this.fa + d / 100
-      if(this.fa > 0) {
+      this.fa = this.fa + d / 1000
+      if(this.fa > 1) {
         this.a = 1
         this.status = 'on'
       } else {
