@@ -108,6 +108,16 @@ class P {
 
   checkMove(route) {
     this.handleMove()
+    let to = this.network.vertices.find((vertex) => {
+      return vertex.pos.eq(route.to)
+    })
+    if(to && to.type && to.type==='gate') {
+      if(to.opt > this.dataCount) {
+        return false
+      }
+    }
+
+
     let availableRoute = this.getRoute(route)
     if(availableRoute && availableRoute.isAvailable()) {
 

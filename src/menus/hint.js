@@ -4,7 +4,7 @@ export default class Hint {
       {m:'Press [Arrows] for moving, SPACE for action H in game for help'},
       {m:'Press [R] to reset level'},
       {m:'Use [Up and Down Arrows]  to move Up and Down, Select with [Space]'},
-      {m:'Use [Ctrl] to place beacon, You will bring back to the beacon after 5 seconds'}
+      {m:'Use [Ctrl] to place beacon, You will be brought back to the beacon after 5 seconds'}
     ]
   }
   d() {
@@ -30,5 +30,4 @@ export default class Hint {
     this.handle = setTimeout(() => {this.active = false}, 15000)
     return true
   }
-
 }

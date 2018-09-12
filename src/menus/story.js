@@ -16,7 +16,7 @@ export default class Story {
       'You have to gather data to move across restricted access'
     ],
       [
-        'Use [ctrl.] to place a beacon, you will be bring back after 5 seconds',
+        'Use [ctrl.] to place a beacon, you will be brought back after 5 seconds',
         'or by pressing [ctrl.] again'
       ],
 
@@ -77,7 +77,7 @@ export default class Story {
       ctx.font = '18px Arial'
       ctx.fillStyle = '#121314'
       ctx.fillRect(0,0, C_WIDTH, 150)
-      ctx.fillStyle= '#3565da'
+      ctx.fillStyle= '#4ddfe2'
 
       for(let i = 0; i < this.currentLine; i ++) {
         ctx.fillText(this.dialog[i], 0, 30 + i * 30)
