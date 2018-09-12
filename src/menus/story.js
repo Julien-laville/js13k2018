@@ -10,7 +10,7 @@ export default class Story {
      'You exprience a network failure',
        'To activate network you have to reach the core',
        'Move with [arrows]',
-        'Press [R] to reset the level'
+        'Press [R] to reset the level, [H] for help'
     ],
     [
       'You have to gather data to move across restricted access'
