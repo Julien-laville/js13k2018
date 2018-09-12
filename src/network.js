@@ -15,6 +15,7 @@ class W {
 
   reset() {
     this.buildNetwork(this.map)
+    this.reboot()
   }
 
   buildNetwork() {

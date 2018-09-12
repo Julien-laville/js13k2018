@@ -37,9 +37,9 @@ export class Vertex {
     ctx.fillStyle = `rgba(255,255,255,${this.a})`
     if(this.type === 'data') {
       if(this.consumed) {
-        ctx.fillStyle = '#811'
+        ctx.fillStyle = `rgba(136,17,17,${this.a})`
       } else {
-        ctx.fillStyle = '#0ff'
+        ctx.fillStyle = `rgba(0,255,255,${this.a})`
       }
       ctx.fillRect(this.pos.x * 30-5, this.pos.y * 30-5, 10, 10)
     } else if(this.type === 'gate') {
@@ -73,6 +73,7 @@ export class Vertex {
   }
 
   boot() {
+    console.log('booot')
     this.a = 0
     this.fa = 0
     this.lastUpdate = new Date().getTime()
@@ -83,7 +84,6 @@ export class Vertex {
     if(this.status === 'booting') {
       let d = new Date().getTime() - this.lastUpdate
       this.fa = this.fa + d / 100
-      console.log(this.fa)
       if(this.fa > 0) {
         this.a = 1
         this.status = 'on'
