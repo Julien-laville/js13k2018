@@ -262,7 +262,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Win; });\nclass Win {\n  constructor() {\n    this.credits = [\n      'Freely inspired by LOSSST by Xem',\n      'hardcoded by alternative'\n    ]\n    this.cd = 100\n  }\n\n  d() {\n    ctx.fillStyle = '#fff'\n    this.cd -= .4\n    ctx.fillText('You win', 10, this.cd)\n    for(let i = 0; i < this.credits.length; i++) {\n      ctx.fillText(this.credits[i], 10, this.cd + i * 20 + 20)\n    }\n  }\n}\n\n//# sourceURL=webpack:///./src/menus/win.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Win; });\nclass Win {\n  constructor() {\n    this.credits = [\n      'Freely inspired by LOSSST by Xem',\n      '',\n      'Hardcoded by alternative',\n      '',\n      'Thanks to:',\n      'Anouk',\n      'Adrien',\n      'JB',\n      'Antoine',\n      'for supporting & testing'\n    ]\n    this.cd = 100\n  }\n\n  d() {\n    ctx.font = \"22px Arial\"\n    ctx.fillStyle = '#fff'\n    this.cd -= .4\n    ctx.fillText('You win', 10, this.cd)\n    ctx.font = \"18px Arial\"\n    for(let i = 0; i < this.credits.length; i++) {\n      ctx.fillText(this.credits[i], 10, this.cd + i * 40 + 20)\n    }\n  }\n}\n\n//# sourceURL=webpack:///./src/menus/win.js?");
 
 /***/ }),
 
