@@ -77,6 +77,15 @@ class W {
       vertex.boot()
     })
   }
+
+  finish() {
+    this.edges.forEach((edge) => {
+      edge.finish()
+    })
+    this.vertices.forEach((vertex) => {
+      vertex.finish()
+    })
+  }
 }
 
 export default W

@@ -17,13 +17,22 @@ export class Edge {
     ctx.moveTo(this.from.x * 30, this.from.y * 30)
     ctx.lineTo(this.to.x * 30, this.to.y * 30)
     if(this.isUnlimited) {
-      ctx.strokeStyle = `rgba(120,255,59,${this.a})`
+      ctx.strokeStyle = `rgba(152,235,235,${this.a / 3})`
+      ctx.lineWidth = 12
+      ctx.stroke()
+      ctx.strokeStyle = `rgba(255,255,255,${this.a})`
+      ctx.lineWidth = 2
+      ctx.stroke()
     } else if(this.remaining === 1) {
-      ctx.strokeStyle = `rgba(57,22,207,${this.a})`
+      ctx.strokeStyle = `rgba(152,235,235,${this.a})`
+      ctx.lineWidth = 2
+      ctx.stroke()
     } else if(this.remaining === 0){
-      ctx.strokeStyle = `rgba(68,17,204,${this.a})`    }
-    ctx.lineWidth = 5
-    ctx.stroke()
+      ctx.strokeStyle = `rgba(68,17,204,${this.a / 2})`
+      ctx.lineWidth = 2
+      ctx.stroke()
+    }
+
     ctx.lineWidth = 1
   }
 
@@ -72,6 +81,10 @@ export class Edge {
     this.a = 0
     this.fa = 0
     this.lastUpdate = new Date().getTime()
+  }
+
+  finish() {
+    this.status = 'finish'
   }
 
   reboot() {

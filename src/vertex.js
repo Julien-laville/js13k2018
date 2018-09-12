@@ -37,7 +37,7 @@ export class Vertex {
     ctx.fillStyle = `rgba(255,255,255,${this.a})`
     if(this.type === 'data') {
       if(this.consumed) {
-        ctx.fillStyle = `rgba(136,17,17,${this.a})`
+        ctx.fillStyle = `rgba(150,17,17,${this.a})`
       } else {
         ctx.fillStyle = `rgba(0,255,255,${this.a})`
       }
@@ -77,6 +77,10 @@ export class Vertex {
     this.fa = 0
     this.lastUpdate = new Date().getTime()
     this.status = 'booting'
+  }
+
+  finish() {
+    this.status = 'finish'
   }
 
   k() {

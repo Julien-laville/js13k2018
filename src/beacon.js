@@ -30,12 +30,18 @@ export class Beacon {
   d() {
     if(this.active) {
       ctx.beginPath()
-      ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-      ctx.strokeStyle = '#fff'
+      ctx.arc(this.pos.x * 30, this.pos.y * 30, 8, 0, Math.PI * 2)
+      ctx.fillStyle = '#fff'
       ctx.strokeWidth = 2
-      ctx.stroke()
+      ctx.fill()
+      ctx.fillStyle = '#000'
+      ctx.fillText(this.calcTime(), this.pos.x * 30 - 3, this.pos.y * 30 + 3)
 
-      ctx.fillText(this.calcTime(), this.pos.x * 30, this.pos.y * 30)
+      let d = this.time / 200
+      ctx.beginPath()
+      ctx.arc(Math.cos(d ) * 13 + this.pos.x * 30, Math.sin(d ) * 13 + this.pos.y * 30, 3, 0,Math.PI * 2)
+      ctx.fillStyle =  `hsla(${(d * 30) % 300}, 100%, 50%, 1)`
+      ctx.fill()
 
     }
   }
