@@ -141,10 +141,10 @@ export class Vertex {
       }
     }
     if (p.dataCount >= this.opt) {
-      ctx.strokeStyle = "#294"
       ctx.fillStyle = `rgba(30,150,170,${this.a})`
       ctx.beginPath()
       ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+      ctx.strokeStyle = "#fff"
       ctx.stroke()
 
     } else {
@@ -153,6 +153,8 @@ export class Vertex {
       ctx.strokeStyle = "#911"
       ctx.fillStyle = `rgba(150,17,17,${this.a})`
       ctx.fill()
+
+
 
     }
 
