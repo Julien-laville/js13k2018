@@ -9,11 +9,17 @@ export default class Story {
     this.dialogs = [[
      'You exprience a network failure',
        'To activate network you have to reach the core',
-       'Move with [ZQSD] or [WASD]'
+       'Move with [arrows]',
+        'Press [R] to reset the level'
     ],
     [
       'You have to gather data to move across restricted access'
-    ]
+    ],
+      [
+        'Use [ctrl.] to place a beacon, you will be bring back after 5 seconds',
+        'or by pressing [ctrl.] again'
+      ],
+
     ]
   }
 
@@ -68,6 +74,7 @@ export default class Story {
 
   d() {
     if(this.active) {
+      ctx.font = '18px Arial'
       ctx.fillStyle = '#121314'
       ctx.fillRect(0,0, C_WIDTH, 150)
       ctx.fillStyle= '#3565da'
@@ -86,6 +93,7 @@ export default class Story {
       ctx.strokeWidth= 2
       ctx.stroke()
       ctx.fillStyle = "#fff"
+      ctx.font = '14px Arial'
       ctx.fillText('Esc to skip', C_WIDTH - 95, 135)
     }
   }

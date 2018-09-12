@@ -7,12 +7,12 @@ function k() {
     press[e.keyCode] = false
   }
 }
-k.UP = 90
-k.LEFT = 81
-k.DOWN = 83
-k.RIGHT = 68
+k.UP = 38
+k.LEFT = 37
+k.DOWN = 40
+k.RIGHT = 39
 
-k.A = 16
+k.A = 17
 k.B = 32
 k.HELP = 72
 k.RESET = 82

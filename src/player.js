@@ -129,15 +129,12 @@ class P {
   d() {
     this.beacon.d()
     ctx.beginPath()
-    ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-    if(this.move) {
-      ctx.fillStyle='#f0f'
-    } else {
-      ctx.fillStyle='#0f0'
-    }
+    ctx.arc(this.pos.x * 30, this.pos.y * 30, 8, 0, Math.PI * 2)
+    ctx.fillStyle='#68afff'
+
+
     ctx.fill()
     ctx.fillStyle = "#fff"
-    ctx.fillText(this.ttl, this.pos.x * 30 + 10, this.pos.y * 30 - 10)
 
     /* draw ttl */
     for(let i = 0; i < this.ttl; i++) {
