@@ -43,20 +43,7 @@ export class Vertex {
       }
       ctx.fillRect(this.pos.x * 30-5, this.pos.y * 30-5, 10, 10)
     } else if(this.type === 'gate') {
-        ctx.beginPath()
-        ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
-        if (p.dataCount >= this.opt) {
-            ctx.strokeStyle = "#294"
-            ctx.fillStyle = `rgba(30,150,170,${this.a})`
-        } else {
-            ctx.strokeStyle = "#911"
-            ctx.fillStyle = `rgba(150,17,17,${this.a})`
-        }
-        ctx.fill()
-        ctx.beginPath()
-        ctx.arc(this.pos.x * 30, this.pos.y * 30, 10, 0, Math.PI * 2)
-        ctx.setLineDash([4, 2, 2, 2])
-        ctx.stroke()
+        this.drawGate()
     } else if(this.type === 'end') {
       ctx.fillStyle = `rgba(9,18,127,${this.a})`
       ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
@@ -95,6 +82,39 @@ export class Vertex {
       }
       this.lastUpdate  = new Date().getTime()
     }
+  }
+
+  drawGate() {
+
+    for(let i = 0; i < this.opt; i ++) {
+      if(p.dataCount > i) {
+        ctx.beginPath()
+        ctx.arc(Math.cos((2 * Math.PI / this.opt) * i) * 15 + this.pos.x * 30, Math.sin((2 * Math.PI / this.opt) * i) * 15 + this.pos.y * 30, 5, 0, Math.PI * 2)
+        ctx.fillStyle= "#fff"
+        ctx.fill()
+      } else {
+        ctx.beginPath()
+        ctx.arc(Math.cos((2 * Math.PI / this.opt) * i) * 15 + this.pos.x * 30, Math.sin((2 * Math.PI / this.opt) * i) * 15 + this.pos.y * 30, 5, 0, Math.PI * 2)
+        ctx.strokeStyle = "#fff"
+        ctx.stroke()
+      }
+    }
+    if (p.dataCount >= this.opt) {
+      ctx.strokeStyle = "#294"
+      ctx.fillStyle = `rgba(30,150,170,${this.a})`
+      ctx.beginPath()
+      ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+      ctx.stroke()
+
+    } else {
+      ctx.beginPath()
+      ctx.arc(this.pos.x * 30, this.pos.y * 30, 5, 0, Math.PI * 2)
+      ctx.strokeStyle = "#911"
+      ctx.fillStyle = `rgba(150,17,17,${this.a})`
+      ctx.fill()
+
+    }
+
   }
 
   reboot() {

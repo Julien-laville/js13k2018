@@ -10,15 +10,14 @@ export class Beacon {
 
   placeBeacon(playerPos) {
     this.active = true
+    this.lastUpdate = new Date().getTime()
     this.pos.set(playerPos.x, playerPos.y)
     this.time = 5000
   }
 
-
   reset() {
     this.active = false
   }
-
 
   k() {
     if(this.time < 0 && this.active) {
@@ -39,7 +38,7 @@ export class Beacon {
 
       let d = this.time / 200
       ctx.beginPath()
-      ctx.arc(Math.cos(d ) * 13 + this.pos.x * 30, Math.sin(d ) * 13 + this.pos.y * 30, 3, 0,Math.PI * 2)
+      ctx.arc(Math.cos(d) * 13 + this.pos.x * 30, Math.sin(d ) * 13 + this.pos.y * 30, 3, 0,Math.PI * 2)
       ctx.fillStyle =  `hsla(${(d * 30) % 300}, 100%, 50%, 1)`
       ctx.fill()
 

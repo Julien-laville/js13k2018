@@ -32,6 +32,7 @@ class P {
   }
 
   reset() {
+    this.beacon.reset()
     this.network.reset()
     this.edges = this.network.edges
     this.vertices = this.network.vertices
@@ -47,16 +48,22 @@ class P {
     if(press[k.HELP]) {
       window.gameState = 'help'
     }
-
-    if(press[k.RESET]) {
-      this.reset()
-    }
-
-    if(press[k.A]) {
-      this.beacon.placeBeacon(this.pos)
-    }
-
     if(!this.moving) {
+      if(press[k.RESET]) {
+        this.reset()
+        this.handleMove()
+      }
+      if(press[k.A]) {
+        if(this.beacon.active) {
+          this.beacon.reset()
+          this.pos.set(this.beacon.pos.x, this.beacon.pos.y)
+        } else {
+          this.beacon.placeBeacon(this.pos)
+        }
+        this.handleMove()
+      }
+
+
       let futureRoute
       if(press[k.LEFT]) {
         let p = this.pos.cadd(-1,0)
