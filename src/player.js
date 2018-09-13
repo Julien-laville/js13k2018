@@ -32,7 +32,7 @@ class P {
   }
 
   reset() {
-    this.totalDataCount = 0
+    this.dataCount = 0
     this.beacon.reset()
     this.network.reset()
     this.edges = this.network.edges
