@@ -10,8 +10,18 @@ export default class MenuManager {
 
     this.items = []
       if(this.isLevel) {
+
+        let top = 100
+        let offset = -170
           items.forEach((item, i) => {
-              this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(30, i * 50 + 100), i === 0))
+            top += 50
+
+            if(i % 4 === 0) {
+              top = 100
+              offset+=200
+            }
+            console.log(top, offset)
+            this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(offset, top), i === 0))
           })
       } else {
           items.forEach((item, i) => {
