@@ -16,7 +16,7 @@ export default class MenuManager {
           items.forEach((item, i) => {
             top += 50
 
-            if(i % 4 === 0) {
+            if(i % 6 === 0) {
               top = 100
               offset+=200
             }
