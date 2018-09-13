@@ -16,12 +16,12 @@ export default class MenuManager {
           items.forEach((item, i) => {
             top += 50
 
-            if(i % 6 === 0) {
+            if(i % 5 === 0) {
               top = 100
               offset+=200
             }
             console.log(top, offset)
-            this.items.push(new MenuItem({t:`Level ${i}`}, new V2c(offset, top), i === 0))
+            this.items.push(new MenuItem({t:`Level ${i + 1}`}, new V2c(offset, top), i === 0))
           })
       } else {
           items.forEach((item, i) => {
